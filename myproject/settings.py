@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-ly&m(ocfme*=78^zu@oe#mm@yh*@6uuz-uru_$_x%09nb)p3wk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -112,7 +112,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# 👈 Точный путь к папке static внутри kura_park
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'kura_park' / 'static',
 ]
