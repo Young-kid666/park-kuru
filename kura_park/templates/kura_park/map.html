@@ -1,0 +1,216 @@
+{% extends 'kura_park/base.html' %}
+
+{% block title %}Интерактивная карта — Парк Кура{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    .page-hero { text-align: center; padding: 40px 20px 10px 20px; max-width: 900px; margin: 0 auto; }
+    .page-hero h1 { font-family: 'Georgia', serif; font-size: 42px; margin: 8px 0; letter-spacing: 2px; color: #ffffff; }
+    .page-hero .subtitle { color: #c5a059; font-size: 12px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
+    .hero-divider { display: flex; align-items: center; justify-content: center; margin-top: 15px; }
+    .hero-divider .diamond { color: #c5a059; font-size: 10px; margin: 0 15px; }
+    .hero-divider::before, .hero-divider::after { content: ''; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #c5a059, transparent); }
+    .content-section { padding: 20px; max-width: 1200px; margin: 0 auto; }
+    
+    .map-wrapper {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 2px solid rgba(197, 160, 89, 0.5);
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+        background: #111;
+    }
+
+    #parkMap {
+        height: 580px;
+        width: 100%;
+    }
+
+    .map-controls-panel {
+        background: rgba(10, 18, 12, 0.95);
+        border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        padding: 14px 20px;
+        text-align: center;
+    }
+
+    .map-hint { font-size: 14px; color: #ffffff; margin: 0; }
+    .map-hint span { color: #c5a059; font-weight: bold; }
+
+    /* МОДАЛЬНОЕ ОКНО */
+    .modal-backdrop {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+        display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal-card {
+        background: #0a120c; border: 1px solid #c5a059; border-radius: 12px;
+        padding: 28px; max-width: 460px; width: 100%; position: relative;
+    }
+    .modal-card h3 { font-family: 'Georgia', serif; color: #c5a059; margin-top: 0; font-size: 22px; }
+    .modal-card p { font-size: 13px; opacity: 0.8; margin-bottom: 20px; }
+    .close-btn { position: absolute; top: 15px; right: 18px; background: transparent; border: none; color: #c5a059; font-size: 22px; cursor: pointer; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; color: #c5a059; margin-bottom: 6px; font-weight: 600; }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%; box-sizing: border-box; background: rgba(5, 10, 7, 0.9);
+        border: 1px solid rgba(197, 160, 89, 0.3); border-radius: 6px; padding: 10px 12px; color: #ffffff; font-size: 14px; outline: none;
+    }
+    .btn-save-mark {
+        width: 100%; background: #c5a059; color: #050a07; font-weight: 700;
+        border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 10px;
+    }
+
+    @media (max-width: 768px) { #parkMap { height: 420px; } .page-hero h1 { font-size: 30px; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <span class="subtitle">ОБЪЕКТЫ И БЛАГОУСТРОЙСТВО</span>
+    <h1>ИНТЕРАКТИВНАЯ КАРТА</h1>
+    <div class="hero-divider">
+        <span class="diamond">◆</span>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="map-wrapper">
+        <div class="map-controls-panel">
+            <p class="map-hint">
+                <span>📍</span> Кликните в любой точке карты, чтобы оставить предложение по благоустройству!
+            </p>
+        </div>
+        <div id="parkMap"></div>
+    </div>
+</section>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal-backdrop" id="markModal">
+    <div class="modal-card">
+        <button class="close-btn" id="closeModal">&times;</button>
+        <h3>Новая метка на карте</h3>
+        <p>Расскажите об идее или предложении по благоустройству в этой точке.</p>
+
+        <form id="addMarkForm">
+            <input type="hidden" id="markLat">
+            <input type="hidden" id="markLng">
+
+            <div class="form-group">
+                <label for="markTitle">Заголовок / Ваше имя *</label>
+                <input type="text" id="markTitle" required placeholder="Например: Поставить скамейку">
+            </div>
+
+            <div class="form-group">
+                <label for="markCategory">Категория</label>
+                <select id="markCategory">
+                    <option value="idea">💡 Предложение / Идея</option>
+                    <option value="fix">🛠 Благоустройство / Починить</option>
+                    <option value="place">🌲 Интересное место</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="markComment">Комментарий *</label>
+                <textarea id="markComment" rows="3" required placeholder="Опишите подробнее..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-save-mark">Добавить метку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ТОЧНЫЕ КООРДИНАТЫ ПАРКА КУРА В НОВОПАВЛОВСКЕ
+        const PARK_LAT = 43.9610;
+        const PARK_LNG = 43.8745;
+
+        // Инициализация с хорошим масштабом (16)
+        const map = L.map('parkMap').setView([PARK_LAT, PARK_LNG], 16);
+
+        // Светлый и подробный слой OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Стартовая метка самого Парка
+        L.marker([PARK_LAT, PARK_LNG]).addTo(map)
+            .bindPopup('<strong style="color:#3a533c;">Парк Кура</strong><br>Центральная аллея')
+            .openPopup();
+
+        // Подгрузка пользовательских меток из БД
+        fetch("{% url 'get_marks' %}")
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(mark => {
+                    L.marker([mark.latitude, mark.longitude])
+                        .addTo(map)
+                        .bindPopup(`
+                            <div style="color: #000; font-family: sans-serif;">
+                                <strong style="color: #1b3322;">${mark.title}</strong><br>
+                                <p style="margin: 4px 0; font-size: 13px;">${mark.comment}</p>
+                            </div>
+                        `);
+                });
+            })
+            .catch(err => console.log('Ошибка меток:', err));
+
+        const modal = document.getElementById('markModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const form = document.getElementById('addMarkForm');
+        let tempMarker = null;
+
+        map.on('click', function(e) {
+            document.getElementById('markLat').value = e.latlng.lat;
+            document.getElementById('markLng').value = e.latlng.lng;
+
+            if (tempMarker) map.removeLayer(tempMarker);
+            tempMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+
+            modal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            if (tempMarker) map.removeLayer(tempMarker);
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const payload = {
+                title: document.getElementById('markTitle').value,
+                category: document.getElementById('markCategory').value,
+                comment: document.getElementById('markComment').value,
+                lat: document.getElementById('markLat').value,
+                lng: document.getElementById('markLng').value
+            };
+
+            fetch("{% url 'add_mark' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.status === 'ok') {
+                    alert('Метка успешно добавлена!');
+                    modal.classList.remove('active');
+                    form.reset();
+                } else {
+                    alert('Ошибка: ' + res.message);
+                }
+            })
+            .catch(err => alert('Ошибка при сохранении метки'));
+        });
+    });
+</script>
+{% endblock %}

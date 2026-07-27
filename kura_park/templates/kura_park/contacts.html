@@ -1,0 +1,321 @@
+{% extends 'kura_park/base.html' %}
+
+{% block title %}Контакты — Парк Кура{% endblock %}
+
+{% block content %}
+<!-- ВЕРХНИЙ БАННЕР СТРАНИЦЫ -->
+<section class="page-hero">
+    <span class="subtitle">СВЯЗАТЬСЯ С НАМИ</span>
+    <h1>КОНТАКТЫ И ОБРАТНАЯ СВЯЗЬ</h1>
+    <div class="hero-divider">
+        <span class="diamond">◆</span>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="contacts-grid">
+        
+        <!-- БЛОК С КОНТАКТНОЙ ИНФОРМАЦИЕЙ -->
+        <div class="contact-info-card">
+            <h2>Информация для посетителей</h2>
+            <div class="info-line"></div>
+
+            <div class="contact-item">
+                <span class="icon">📍</span>
+                <div>
+                    <strong>Адрес:</strong>
+                    <p>Ставропольский край, Кировский г.о., г. Новопавловск, пойма реки Кура</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <span class="icon">🕒</span>
+                <div>
+                    <strong>Режим работы:</strong>
+                    <p>Парковая зона открыта круглосуточно<br>Администрация: Пн-Пт 08:00 – 17:00</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <span class="icon">✉️</span>
+                <div>
+                    <strong>Электронная почта:</strong>
+                    <p>info@park-kura.ru</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <span class="icon">📞</span>
+                <div>
+                    <strong>Телефон администрации:</strong>
+                    <p>+7 (86538) 2-00-00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ФОРМА ОБРАТНОЙ СВЯЗИ -->
+        <div class="contact-form-card">
+            <h2>Написать нам</h2>
+            <div class="info-line"></div>
+
+            {% if success %}
+                <div class="alert-success">
+                    ✨ <strong>Спасибо!</strong> Ваше сообщение успешно отправлено. Мы свяжемся с вами в ближайшее время.
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'contacts' %}" class="feedback-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Электронная почта *</label>
+                    <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Текст обращения / предложения *</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Опишите ваш вопрос или предложение..."></textarea>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">Я согласен на обработку персональных данных</label>
+                </div>
+
+                <button type="submit" class="btn-submit">Отправить сообщение</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<!-- ИНТЕРАКТИВНАЯ КАРТА ПРОЕЗДА -->
+<section class="content-section">
+    <div class="section-title-wrapper">
+        <h2 class="section-title">Как к нам добраться</h2>
+        <div class="title-line"></div>
+    </div>
+    
+    <div class="map-container">
+        <iframe 
+            src="https://yandex.ru/map-widget/v1/?ll=43.834000%2C43.968000&z=14&pt=43.834000%2C43.968000%2Cpm2grm" 
+            width="100%" 
+            height="380" 
+            frameborder="0" 
+            allowfullscreen="true"
+            style="border-radius: 12px; border: 1px solid rgba(197, 160, 89, 0.3);">
+        </iframe>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-hero {
+        text-align: center;
+        padding: 40px 20px 10px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .page-hero h1 {
+        font-family: 'Georgia', serif;
+        font-size: 42px;
+        margin: 8px 0;
+        letter-spacing: 2px;
+        color: #ffffff;
+    }
+
+    .page-hero .subtitle {
+        color: #c5a059;
+        font-size: 12px;
+        letter-spacing: 3px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .hero-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .hero-divider .diamond {
+        color: #c5a059;
+        font-size: 10px;
+        margin: 0 15px;
+    }
+
+    .hero-divider::before,
+    .hero-divider::after {
+        content: '';
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #c5a059, transparent);
+    }
+
+    .content-section {
+        padding: 25px 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .contacts-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .contact-info-card,
+    .contact-form-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(197, 160, 89, 0.25);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-info-card h2,
+    .contact-form-card h2 {
+        font-family: 'Georgia', serif;
+        font-size: 22px;
+        color: #c5a059;
+        margin: 0 0 8px 0;
+    }
+
+    .info-line {
+        width: 40px;
+        height: 2px;
+        background: #c5a059;
+        margin-bottom: 25px;
+    }
+
+    .contact-item {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        align-items: flex-start;
+    }
+
+    .contact-item .icon {
+        font-size: 22px;
+    }
+
+    .contact-item strong {
+        color: #ffffff;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .contact-item p {
+        margin: 0;
+        opacity: 0.8;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* ФОРМА */
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        color: #c5a059;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(5, 10, 7, 0.8);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        border-radius: 6px;
+        padding: 10px 14px;
+        color: #ffffff;
+        font-size: 14px;
+        outline: none;
+        transition: border 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: #f1c40f;
+    }
+
+    .form-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    .btn-submit {
+        width: 100%;
+        background: #c5a059;
+        color: #050a07;
+        font-weight: 700;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background: #f1c40f;
+        box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+    }
+
+    .alert-success {
+        background: rgba(46, 204, 113, 0.15);
+        border: 1px solid #2ecc71;
+        color: #2ecc71;
+        padding: 12px 15px;
+        border-radius: 6px;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .section-title-wrapper {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-family: 'Georgia', serif;
+        font-size: 26px;
+        color: #c5a059;
+        margin: 0;
+    }
+
+    .title-line {
+        width: 50px;
+        height: 2px;
+        background: #c5a059;
+        margin: 8px auto 0 auto;
+    }
+
+    @media (max-width: 800px) {
+        .contacts-grid {
+            grid-template-columns: 1fr;
+        }
+        .page-hero h1 {
+            font-size: 30px;
+        }
+    }
+</style>
+{% endblock %}

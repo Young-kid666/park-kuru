@@ -1,0 +1,83 @@
+{% extends 'kura_park/base.html' %}
+{% load static %}
+
+{% block title %}Храмы и святыни — Парк Кура{% endblock %}
+
+{% block content %}
+<!-- ВЕРХНИЙ БАННЕР СТРАНИЦЫ -->
+<section class="page-hero">
+    <span class="subtitle">ДУХОВНОЕ НАСЛЕДИЕ И АРХИТЕКТУРА</span>
+    <h1>ХРАМЫ КРАЯ</h1>
+    <p class="hero-desc">Важнейшие духовно-просветительские центры Кировского округа, бережно хранящие многовековые православные традиции</p>
+    <div class="hero-divider">
+        <span class="diamond">◆</span>
+    </div>
+</section>
+
+<!-- ОСНОВНОЙ ОПИСАТЕЛЬНЫЙ БЛОК: ДВА ХРАМА -->
+<section class="content-section">
+    <div class="temple-grid">
+        
+        <!-- ХРАМ 1: Владимирской иконы Божией Матери -->
+        <div class="lead-card">
+            <h2 class="block-title">Храм Владимирской иконы Божией Матери</h2>
+            <p>
+                Один из почитаемых православных храмов региона, занимающий особое место в историко-культурном каркасе туристического кластера «Ворота Кавказа». Храм является центром притяжения верующих и хранителем традиций духовности и согласия.
+            </p>
+            <p>
+                Приход активно ведет просветительскую работу, организует мероприятия для молодежи и объединяет паломников со всего Ставропольского края.
+            </p>
+        </div>
+
+        <!-- ХРАМ 2: Святых апостолов Петра и Павла -->
+        <div class="park-card card-gold">
+            <h2 class="block-title">Храм св. апостолов Петра и Павла</h2>
+            <p>
+                Названный в честь первоверховных апостолов, этот храм символизирует стойкость веры, преемственность поколений и глубокие исторические корни православия на юге России.
+            </p>
+            <ul class="activity-list" style="margin-top: 15px;">
+                <li><strong>Просвещение:</strong> Духовно-нравственные беседы и сохранение православных традиций.</li>
+                <li><strong>Культура:</strong> Участие в региональных просветительских и культурных инициативах.</li>
+                <li><strong>Паломничество:</strong> Важный пункт познавательных этнографических маршрутов края.</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-hero { text-align: center; padding: 40px 20px 10px 20px; max-width: 900px; margin: 0 auto; }
+    .page-hero h1 { font-family: 'Georgia', serif; font-size: 42px; margin: 8px 0; letter-spacing: 2px; color: #ffffff; }
+    .page-hero .subtitle { color: #c5a059; font-size: 12px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
+    .page-hero .hero-desc { font-size: 15px; opacity: 0.85; max-width: 650px; margin: 8px auto 0 auto; }
+    .hero-divider { display: flex; align-items: center; justify-content: center; margin-top: 15px; }
+    .hero-divider .diamond { color: #c5a059; font-size: 10px; margin: 0 15px; }
+    .hero-divider::before, .hero-divider::after { content: ''; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #c5a059, transparent); }
+    
+    .content-section { padding: 30px 20px; max-width: 1100px; margin: 0 auto; }
+    .temple-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    
+    .lead-card, .park-card {
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .block-title { font-family: 'Georgia', serif; font-size: 22px; color: #c5a059; margin-top: 0; margin-bottom: 15px; }
+    .lead-card p, .park-card p { font-size: 15px; line-height: 1.7; opacity: 0.85; margin-bottom: 12px; }
+
+    .activity-list { list-style: none; padding: 0; margin: 0; }
+    .activity-list li { margin-bottom: 12px; font-size: 14px; line-height: 1.6; opacity: 0.85; position: relative; padding-left: 18px; }
+    .activity-list li::before { content: '•'; color: #c5a059; position: absolute; left: 0; font-size: 18px; }
+    .activity-list strong { color: #c5a059; }
+
+    @media (max-width: 800px) {
+        .temple-grid { grid-template-columns: 1fr; }
+        .page-hero h1 { font-size: 30px; }
+    }
+</style>
+{% endblock %}

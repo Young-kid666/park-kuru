@@ -1,0 +1,204 @@
+{% extends 'kura_park/base.html' %}
+{% load static %}
+
+{% block title %}Народный музей имени А.В. Чухно — Парк Кура{% endblock %}
+
+{% block content %}
+<!-- ОТСТУП ОТ ШАПКИ И БАННЕР МУЗЕЯ -->
+<div style="padding-top: 30px;"></div>
+
+<section class="content-section" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <div style="text-align: center; margin-bottom: 40px;" class="museum-fade-in">
+        <span style="color: var(--gold-color); font-size: 13px; letter-spacing: 4px; font-weight: bold; display: block; margin-bottom: 8px;">ИСТОРИЧЕСКОЕ НАСЛЕДИЕ</span>
+        <h1 style="font-family: 'Georgia', serif; font-size: 44px; margin: 0 0 12px 0; color: #fff; letter-spacing: 2px;">НАРОДНЫЙ МУЗЕЙ</h1>
+        <p style="font-size: 16px; opacity: 0.85; max-width: 650px; margin: 0 auto;">Имени А.В. Чухно в посёлке Коммаяк — живая память о первых коммунарах и истории края</p>
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+            <div style="width: 70px; height: 1px; background: linear-gradient(90deg, transparent, #c5a059, transparent);"></div>
+            <span style="color: #c5a059; font-size: 10px; margin: 0 15px;">◆</span>
+            <div style="width: 70px; height: 1px; background: linear-gradient(90deg, transparent, #c5a059, transparent);"></div>
+        </div>
+    </div>
+    
+    <!-- ФОТОГРАФИЯ МУЗЕЯ С КИНЕМАТОГРАФИЧНОЙ ОБРАБОТКОЙ -->
+    <div class="museum-photo-wrapper museum-fade-in">
+        <img src="{% static 'kura_park/images/museum.png' %}" 
+             alt="Народный музей имени А.В. Чухно" 
+             class="museum-enhanced-photo">
+        <div class="photo-caption">Историческое здание музея (бывшая усадьба, 1903 г.) в посёлке Коммаяк</div>
+    </div>
+
+    <!-- ВЕРХНИЙ БЛОК: ИСТОРИЯ И СПРАВКА -->
+    <div class="museum-top-grid museum-fade-in" style="margin-top: 30px;">
+        <!-- О музее -->
+        <div class="custom-museum-card card-border-gold">
+            <span class="custom-card-label" style="color: var(--gold-color);">ИСТОРИЯ</span>
+            <h2 style="font-family: 'Georgia', serif; font-size: 22px; color: #fff; margin-top: 0; margin-bottom: 15px;">Об основателе и здании</h2>
+            <p style="font-size: 14px; line-height: 1.7; opacity: 0.85; margin-bottom: 12px;">
+                Музей был основан в <strong>1968 году</strong> легендарным председателем колхоза «Коммунистический маяк» 
+                <strong>Андреем Васильевичем Чухно</strong>, чье имя учреждение с гордостью носит по сей день.
+            </p>
+            <p style="font-size: 14px; line-height: 1.7; opacity: 0.85; margin: 0;">
+                Экспозиция располагается в историческом центре посёлка — в здании бывшей помещичьей усадьбы 
+                (на фасаде бережно сохранена дата — 1903 год), где в 1920-х годах находилось правление первой коммуны на Ставрополье.
+            </p>
+        </div>
+
+        <!-- Краткая справка -->
+        <div class="custom-museum-card card-border-green">
+            <span class="custom-card-label" style="color: #5c835f;">СПРАВКА</span>
+            <h2 style="font-family: 'Georgia', serif; font-size: 22px; color: #fff; margin-top: 0; margin-bottom: 15px;">Информация</h2>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; opacity: 0.85; line-height: 2.1; color: #fff;">
+                <li>📍 <strong>Адрес:</strong> п. Коммаяк, ул. Ленина, 32А</li>
+                <li>🏛️ <strong>Статус:</strong> Филиал музея (с 2019 г.)</li>
+                <li>📐 <strong>Залы:</strong> 9 залов (>270 кв.м)</li>
+                <li>🚜 <strong>Зона:</strong> Ретро-техника</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ЗАГОЛОВОК ЭКСПОЗИЦИЙ -->
+    <div style="text-align: center; margin: 60px 0 30px 0;" class="museum-fade-in">
+        <h2 style="font-family: 'Georgia', serif; font-size: 30px; color: var(--gold-color); margin: 0; letter-spacing: 1px;">Экспозиции музея</h2>
+        <div style="width: 60px; height: 2px; background: #c5a059; margin: 10px auto 0 auto; border-radius: 2px;"></div>
+    </div>
+
+    <!-- НИЖНЯЯ СЕТКА ЗАЛОВ -->
+    <div class="museum-bottom-grid museum-fade-in">
+        <div class="custom-museum-card card-border-gold">
+            <span class="custom-card-label" style="color: var(--gold-color);">ЗАЛЫ 01-03</span>
+            <h3 style="font-family: 'Georgia', serif; font-size: 19px; color: #fff; margin-top: 0; margin-bottom: 10px;">Быт первых коммунаров</h3>
+            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin: 0;">Уникальные коллекции подлинных предметов быта, орудий труда и личных вещей людей, стоявших у истоков создания коммуны.</p>
+        </div>
+
+        <div class="custom-museum-card card-border-green">
+            <span class="custom-card-label" style="color: #5c835f;">ЗАЛЫ 04-09</span>
+            <h3 style="font-family: 'Georgia', serif; font-size: 19px; color: #fff; margin-top: 0; margin-bottom: 10px;">Архив и документы</h3>
+            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin: 0;">Редкие фотографии, исторические рукописи, газетные вырезки и документы, рассказывающие о вековой летописи края.</p>
+        </div>
+
+        <div class="custom-museum-card card-border-gold">
+            <span class="custom-card-label" style="color: var(--gold-color);">УЛИЧНАЯ ЗОНА</span>
+            <h3 style="font-family: 'Georgia', serif; font-size: 19px; color: #fff; margin-top: 0; margin-bottom: 10px;">Техника под открытым небом</h3>
+            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin: 0;">Широкая площадка-павильон, на которой собраны редкие образцы исторической сельскохозяйственной техники прошлых лет.</p>
+        </div>
+    </div>
+
+    <!-- БАННЕР ПРИГЛАШЕНИЯ -->
+    <div class="museum-fade-in" style="margin-top: 60px; background: rgba(255, 255, 255, 0.025); border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 12px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+        <h2 style="font-family: 'Georgia', serif; font-size: 26px; color: var(--gold-color); margin-top: 0; margin-bottom: 12px;">
+            🏛️ Планируете визит?
+        </h2>
+        <p style="opacity: 0.85; font-size: 15px; max-width: 650px; margin: 0 auto 25px; line-height: 1.6;">
+            Приходите прикоснуться к подлинной истории Ставрополья и узнать больше о судьбе основателей коммуны.
+        </p>
+        <a href="{% url 'contacts' %}" style="display: inline-block; background: var(--gold-color); color: #050a07; font-weight: bold; padding: 12px 35px; border-radius: 6px; text-decoration: none; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);">
+            Связаться с нами
+        </a>
+    </div>
+
+</section>
+
+<style>
+    /* Анимация плавного появления при прокрутке */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .museum-fade-in {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    /* Улучшенная фото-презентация музея с фильтрами и золотой рамкой */
+    .museum-photo-wrapper {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(197, 160, 89, 0.4);
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+        background-color: #050a07;
+        margin-bottom: 35px;
+    }
+
+    .museum-enhanced-photo {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        display: block;
+        filter: contrast(1.08) saturate(1.15) brightness(0.95);
+        transition: transform 0.5s ease;
+    }
+
+    .museum-photo-wrapper:hover .museum-enhanced-photo {
+        transform: scale(1.02);
+    }
+
+    .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, transparent, rgba(5, 10, 7, 0.95));
+        color: #ffffff;
+        padding: 25px 20px 15px 20px;
+        text-align: center;
+        font-family: 'Georgia', serif;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+    }
+
+    /* Карточки музея */
+    .custom-museum-card {
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 30px;
+        box-sizing: border-box;
+        backdrop-filter: blur(5px);
+    }
+
+    .card-border-gold { border-left: 4px solid var(--gold-color); }
+    .card-border-green { border-left: 4px solid var(--green-accent); }
+
+    .custom-card-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Сетки */
+    .museum-top-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+    }
+
+    .museum-bottom-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    /* Адаптивность для телефонов и планшетов */
+    @media (max-width: 900px) {
+        .museum-top-grid, .museum-bottom-grid {
+            grid-template-columns: 1fr;
+        }
+        .museum-enhanced-photo {
+            height: 280px;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,305 @@
+/* ==========================================
+   1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И БАЗОВЫЕ СТИЛИ
+   ========================================== */
+   :root {
+    --gold-color: #c5a059;
+    --gold-hover: #f1c40f;
+    --green-accent: #3a533c;
+    --dark-bg: #0a120c;
+}
+
+body {
+    background: radial-gradient(circle at center, #1b3322 0%, #0a120c 60%, #020403 100%) fixed;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   2. СТИЛИ ДЛЯ ШАПКИ САЙТА (HEADER)
+   ========================================== */
+.main-header {
+    background: rgba(10, 18, 12, 0.9) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3) !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--gold-color) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--gold-hover) !important;
+}
+
+.main-nav {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+}
+
+.main-nav a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    opacity: 1;
+    color: var(--gold-color) !important;
+}
+
+.main-nav a.active {
+    border-bottom: 2px solid var(--gold-color);
+    padding-bottom: 2px;
+}
+
+/* ==========================================
+   3. ГЛАВНЫЙ БАННЕР (HERO)
+   ========================================== */
+.hero {
+    text-align: center;
+    padding: 60px 20px 20px 20px;
+    background: none;
+}
+
+.hero h1 {
+    font-family: 'Georgia', serif;
+    font-size: 56px;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+}
+
+.hero .subtitle {
+    color: var(--gold-color);
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   4. СЕКЦИИ КОНТЕНТА И СЕТКИ (GRID)
+   ========================================== */
+.content-section {
+    padding: 20px 20px 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Georgia', serif;
+    font-size: 32px;
+    color: var(--gold-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Сетки для карточек */
+.cards-grid, .page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* ==========================================
+   5. КАРТОЧКИ И ИНФО-БЛОКИ
+   ========================================== */
+.park-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 25px;
+    border-radius: 10px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.card-gold { border-left: 4px solid var(--gold-color); }
+.card-green { border-left: 4px solid var(--green-accent); }
+
+.park-card h3 { margin-top: 0; color: #fff; }
+.park-card p { opacity: 0.8; font-size: 15px; line-height: 1.6; margin-bottom: 0; }
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.border-top-gold { border-top: 3px solid var(--gold-color); }
+.border-top-green { border-top: 3px solid var(--green-accent); }
+
+.card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.card-label-gold { color: var(--gold-color); }
+.card-label-green { color: #5c835f; }
+
+.info-card h2 {
+    margin-top: 0;
+    color: #fff;
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+}
+
+.info-card p {
+    opacity: 0.85;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   6. ИНТЕРАКТИВНЫЙ СЛАЙДЕР
+   ========================================== */
+.slider-container {
+    position: relative;
+    max-width: 800px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide-item img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85));
+    color: #fff;
+    padding: 20px 15px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.slider-btn:hover {
+    background: var(--gold-color);
+    color: #000;
+}
+
+.slider-btn.prev { left: 15px; }
+.slider-btn.next { right: 15px; }
+
+/* ==========================================
+   7. ФУТЕР
+   ========================================== */
+.main-footer {
+    background: #020403;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+    padding: 25px 0;
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 60px;
+}
+
+/* ==========================================
+   8. МОБИЛЬНАЯ АДАПТИВНОСТЬ (@media)
+   ========================================== */
+@media (max-width: 850px) {
+    .hero h1 { font-size: 38px; }
+    .slide-item img { height: 300px; }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #0a120c;
+        border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        display: none;
+        flex-direction: column;
+        padding: 15px 0;
+        gap: 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.9);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav a {
+        padding: 14px 25px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
