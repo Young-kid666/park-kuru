@@ -2,16 +2,13 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('news/<int:pk>/', views.news_detail, name='news_detail'),  # НАШ НОВЫЙ ДИНАМИЧЕСКИЙ ПУТЬ
-    path('museum/', views.museum, name='museum'),
-    path('about/', views.about, name='about'),
-    path('thermal/', views.thermal, name='thermal'),
-    path('temple/', views.temple, name='temple'),
-    path('contacts/', views.contacts, name='contacts'),
-    
-    # МАРШРУТЫ ДЛЯ ИНТЕРАКТИВНОЙ КАРТЫ
+    path('', views.home_view, name='home'),
+    path('park/', views.park_view, name='park'),
+    path('museum/', views.museum_view, name='museum'),
+    path('temple/', views.temple_view, name='temple'),
+    path('thermal/', views.thermal_view, name='thermal'),
+    path('about/', views.about_view, name='about'),
     path('map/', views.map_view, name='map'),
-    path('api/marks/', views.get_marks, name='get_marks'),
-    path('api/marks/add/', views.add_mark, name='add_mark'),
+    path('contacts/', views.contacts_view, name='contacts'),
+    path('old-oak/', views.old_oak_view, name='old_oak'),
 ]

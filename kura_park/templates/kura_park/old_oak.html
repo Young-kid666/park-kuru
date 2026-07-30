@@ -1,0 +1,38 @@
+{% extends 'kura_park/base.html' %}
+{% load static %}
+
+{% block title %}Вековой дуб в ст. Старопавловской — Ворота Кавказа{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <svg style="width: 120px; height: 16px; margin: 0 auto 12px auto; display: block;" viewBox="0 0 120 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 14 Q60 -2 115 14" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+        <circle cx="60" cy="2" r="2.5" fill="#d4af37"/>
+    </svg>
+    <span class="subtitle">Природное наследие</span>
+    <h1>Вековой дуб</h1>
+    <p>Станица Старопавловская, Кировский район, Ставропольский край</p>
+</section>
+
+<section class="content-section" style="max-width: 900px; margin: 0 auto;">
+    <div class="park-card" style="padding: 0; margin-bottom: 40px;">
+        <!-- Большая фотография дуба вверху страницы -->
+        <div class="card-image" style="height: 380px;">
+            <img src="{% static 'kura_park/images/old_oak.png' %}" alt="Вековой дуб в Старопавловской" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        
+        <div class="card-content" style="padding: 40px;">
+            <h3 style="color: #d4af37; font-size: 26px; margin-bottom: 20px;">Живой символ истории Старопавловской</h3>
+            <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-bottom: 20px;">
+                На территории станицы Старопавловской Кировского района произрастает уникальный природный объект — вековой дуб. Это могучее дерево является свидетелем многовековой истории освоения этих мест, хранителем традиций и природной гордостью всего Ставропольского края.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-bottom: 20px;">
+                Могучий исполин привлекает внимание краеведов, любителей природы и туристов. Раскидистая крона и массивный ствол подчеркивают суровую красоту и богатство природы Северного Кавказа.
+            </p>
+            <div style="border-left: 3px solid #d4af37; padding-left: 20px; margin-top: 30px; color: #aaaaaa; font-style: italic;">
+                «Вековые деревья — это живая связь времен, объединяющая прошлое, настоящее и будущее нашего края.»
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

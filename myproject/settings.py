@@ -114,8 +114,9 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Правильный путь к стадике для текущей структуры проекта
 STATICFILES_DIRS = [
-    BASE_DIR / 'kura_park' / 'static',
+    BASE_DIR / 'kura_park',
 ]
 
 # НАСТРОЙКИ ДЛЯ МЕДИА-ФАЙЛОВ

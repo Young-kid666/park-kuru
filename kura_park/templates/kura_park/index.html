@@ -1,584 +1,95 @@
 {% extends 'kura_park/base.html' %}
+{% load static %}
 
-{% block title %}Парк Кура — Главная{% endblock %}
+{% block title %}Ворота Кавказа — Главная{% endblock %}
 
 {% block content %}
-<!-- ГЛАВНЫЙ БАННЕР -->
 <section class="hero">
-    <div class="hero-header-block">
-        <!-- Декоративная золотая арка -->
-        <svg class="gate-svg" width="140" height="35" viewBox="0 0 140 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 32C35 10 105 10 130 32" stroke="#c5a059" stroke-width="2" stroke-linecap="round"/>
-            <path d="M25 32C45 16 95 16 115 32" stroke="#c5a059" stroke-width="1" stroke-dasharray="3 3"/>
-            <circle cx="70" cy="10" r="3.5" fill="#c5a059"/>
-        </svg>
-        
-        <!-- Подзаголовок "ВОРОТА КАВКАЗА" -->
-        <span class="subtitle">ВОРОТА КАВКАЗА</span>
-    </div>
-
-    <h1>ПАРК КУРА</h1>
-    <p>Современное пространство для прогулок, спорта и отдыха в самом сердце Новопавловска</p>
-    
-    <div class="hero-divider">
-        <span class="diamond">◆</span>
-    </div>
+    <svg style="width: 120px; height: 16px; margin: 0 auto 12px auto; display: block;" viewBox="0 0 120 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 14 Q60 -2 115 14" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+        <circle cx="60" cy="2" r="2.5" fill="#d4af37"/>
+    </svg>
+    <span class="subtitle">Единый комплекс</span>
+    <h1>Ворота Кавказа</h1>
+    <p>Парк, музей, храм и термальные источники в едином гармоничном пространстве для отдыха и души.</p>
 </section>
 
-<!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ КЛАСТЕРА -->
 <section class="content-section">
-    <div class="section-title-wrapper">
-        <h2 class="section-title">Природа и локации парка</h2>
-        <div class="title-line"></div>
-    </div>
-    
-    <div class="slider-wrapper">
-        <div class="slider-inner" id="customSlider">
-            {% if slides %}
-                {% for slide in slides %}
-                    <div class="slide-node">
-                        {% if slide.image %}
-                            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=1200&q=80';">
-                        {% else %}
-                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=1200&q=80" alt="Пойма реки Кура">
-                        {% endif %}
-                        <div class="slide-overlay"></div>
-                        <div class="slide-info">{{ slide.caption|default:slide.title }}</div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="slide-node">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=1200&q=80" alt="Пойма реки Кура">
-                    <div class="slide-overlay"></div>
-                    <div class="slide-info">Живописная пойма реки Кура — основа эко-троп кластера</div>
-                </div>
-                <div class="slide-node">
-                    <img src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=cover&w=1200&q=80" alt="Термальные зоны">
-                    <div class="slide-overlay"></div>
-                    <div class="slide-info">Проектируемые бальнеологические зоны отдыха</div>
-                </div>
-                <div class="slide-node">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=cover&w=1200&q=80" alt="Исторические маршруты">
-                    <div class="slide-overlay"></div>
-                    <div class="slide-info">Историко-культурные маршруты Кировского округа</div>
-                </div>
-            {% endif %}
-        </div>
-        
-        <button class="ctrl-btn prev-slide" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="ctrl-btn next-slide" onclick="changeSlide(1)">&#10095;</button>
-    </div>
-</section>
-
-<!-- БЛОК С ИНФОРМАЦИЕЙ О ПАРКЕ -->
-<section class="content-section">
-    <div class="section-title-wrapper">
-        <h2 class="section-title">Чем заняться в парке</h2>
-        <div class="title-line"></div>
-    </div>
-    
+    <h2 class="section-title">Наши направления</h2>
     <div class="cards-grid">
-        <div class="park-card card-gold">
-            <span class="card-num">01</span>
-            <h3>Прогулки и природа</h3>
-            <p>Живописные аллеи, ухоженные тропинки и тихие зоны среди зелени.</p>
-        </div>
-
-        <div class="park-card card-green">
-            <span class="card-num">02</span>
-            <h3>Спорт и активность</h3>
-            <p>Современные воркаут-площадки, тренажёры под открытым небом.</p>
-        </div>
-
-        <div class="park-card card-gold">
-            <span class="card-num">03</span>
-            <h3>Уютный отдых</h3>
-            <p>Комфортные лавочки и пространства, где можно отдохнуть от суеты.</p>
-        </div>
-    </div>
-</section>
-
-<!-- БЛОК АНОНСА ИНТЕРАКТИВНОЙ КАРТЫ С ВОЗВРАЩЕННЫМ СМАЙЛИКОМ -->
-<section class="content-section">
-    <div class="map-banner">
-        <h2><span class="map-emoji">🗺️</span> Интерактивная карта территории</h2>
-        <p>
-            Изучайте объекты парка, находите интересные места или оставляйте свои предложения и метки по благоустройству прямо на карте!
-        </p>
-        <a href="{% url 'map' %}" class="btn-map-banner">
-            Открыть карту
-        </a>
-    </div>
-</section>
-
-<!-- СЕКЦИЯ НОВОСТЕЙ И СОБЫТИЙ -->
-<section class="content-section news-section">
-    <div class="section-title-wrapper">
-        <h2 class="section-title">Новости и события парка</h2>
-        <div class="title-line"></div>
-    </div>
-    
-    <div class="cards-grid">
-        {% for article in news %}
-            <div class="news-card">
-                <div class="news-img-wrapper">
-                    {% if article.image %}
-                        <img src="{{ article.image.url }}" alt="{{ article.title }}" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x400';">
-                    {% else %}
-                        <img src="https://via.placeholder.com/600x400" alt="{{ article.title }}">
-                    {% endif %}
-                </div>
-                
-                <div class="news-content">
-                    <span class="news-date">📅 {{ article.created_at|date:"d E Y" }}</span>
-                    <h3>{{ article.title }}</h3>
-                    <p>{{ article.summary }}</p>
-                    
-                    <hr class="news-divider">
-                    
-                    <a href="{% url 'news_detail' article.id %}" class="news-link">Читать далее →</a>
-                </div>
+        
+        <!-- Парк -->
+        <div class="park-card">
+            <div class="card-image">
+                <img src="{% static 'kura_park/images/park.png' %}" alt="Парк">
             </div>
-        {% empty %}
-            <p class="no-news">Новостей пока нет, но скоро они здесь появятся!</p>
-        {% endfor %}
+            <div class="card-content">
+                <h3>Парк</h3>
+                <p>Прогулочные аллеи, живописная природа и уютные зоны для отдыха на свежем воздухе.</p>
+                <a href="{% url 'park' %}" class="card-link">Подробнее &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Музей -->
+        <div class="park-card">
+            <div class="card-image">
+                <img src="{% static 'kura_park/images/museum.png' %}" alt="Музей">
+            </div>
+            <div class="card-content">
+                <h3>Музей</h3>
+                <p>Уникальные исторические экспозиции, богатая культура и наследие региона.</p>
+                <a href="{% url 'museum' %}" class="card-link">Посмотреть &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Храм (С фотографией) -->
+        <div class="park-card">
+            <div class="card-image">
+                <img src="{% static 'kura_park/images/temple.png' %}" alt="Храм">
+            </div>
+            <div class="card-content">
+                <h3>Храм</h3>
+                <p>Духовный центр притяжения, архитектурное величие и умиротворяющая атмосфера.</p>
+                <a href="{% url 'temple' %}" class="card-link">Узнать больше &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Термальный комплекс -->
+        <div class="park-card">
+            <div class="card-content" style="padding-top: 35px;">
+                <h3>Термальные источники</h3>
+                <p>Целебная минеральная вода, оздоровление и расслабление в любое время года.</p>
+                <a href="{% url 'thermal' %}" class="card-link">Посетить &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Вековой дуб -->
+        <div class="park-card">
+            <div class="card-image">
+                <img src="{% static 'kura_park/images/old_oak.png' %}" alt="Вековой дуб">
+            </div>
+            <div class="card-content">
+                <h3>Вековой дуб</h3>
+                <p>Живой символ станицы Старопавловской, хранящий многовековую историю Кировского района.</p>
+                <a href="{% url 'old_oak' %}" class="card-link">Открыть историю &rarr;</a>
+            </div>
+        </div>
+
     </div>
+
+    {% if news %}
+    <div style="margin-top: 50px;">
+        <h2 class="section-title">Последние новости</h2>
+        <div class="cards-grid">
+            {% for item in news %}
+                <div class="info-card">
+                    <span class="card-label">{{ item.created_at|date:"d.m.Y" }}</span>
+                    <h2><a href="{% url 'news_detail' item.pk %}" style="color: #fff; text-decoration: none; font-size: 20px;">{{ item.title }}</a></h2>
+                    <p>{{ item.content|striptags|truncatechars:100 }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </section>
-{% endblock %}
-
-{% block extra_css %}
-<style>
-    /* БАННЕР HERO */
-    .hero {
-        text-align: center;
-        padding: 40px 20px 20px 20px;
-        margin: 0 auto;
-        max-width: 900px;
-    }
-
-    .hero-header-block {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .gate-svg {
-        margin-bottom: 2px;
-    }
-
-    .hero h1 {
-        font-family: 'Georgia', serif;
-        font-size: 52px;
-        margin: 10px 0 8px 0;
-        letter-spacing: 3px;
-        color: #ffffff;
-        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-    }
-
-    .hero .subtitle {
-        color: #c5a059;
-        font-size: 13px;
-        letter-spacing: 4px;
-        font-weight: 700;
-        display: block;
-        text-transform: uppercase;
-    }
-
-    .hero p {
-        font-size: 16px;
-        opacity: 0.85;
-        max-width: 620px;
-        margin: 10px auto 0 auto;
-        line-height: 1.6;
-    }
-
-    .hero-divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 22px;
-    }
-
-    .hero-divider .diamond {
-        color: #c5a059;
-        font-size: 10px;
-        margin: 0 15px;
-    }
-
-    .hero-divider::before,
-    .hero-divider::after {
-        content: '';
-        width: 70px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #c5a059, transparent);
-    }
-
-    /* СЕКЦИИ И ЗАГОЛОВКИ */
-    .content-section {
-        padding: 30px 20px;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    .section-title-wrapper {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .section-title {
-        font-family: 'Georgia', serif;
-        font-size: 30px;
-        color: #c5a059;
-        margin: 0;
-        letter-spacing: 1px;
-    }
-
-    .title-line {
-        width: 60px;
-        height: 2px;
-        background: #c5a059;
-        margin: 10px auto 0 auto;
-        border-radius: 2px;
-    }
-
-    /* ТЁМНЫЙ СЛАЙДЕР */
-    .slider-wrapper {
-        position: relative;
-        max-width: 850px;
-        margin: 0 auto;
-        overflow: hidden;
-        border-radius: 14px;
-        background-color: #050a07 !important;
-        border: 1px solid rgba(197, 160, 89, 0.4);
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9);
-    }
-
-    .slider-inner {
-        display: flex;
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: #050a07;
-    }
-
-    .slide-node {
-        min-width: 100%;
-        position: relative;
-        height: 460px;
-        background-color: #050a07;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .slide-node img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background-color: #050a07;
-    }
-
-    .slide-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at center, transparent 30%, rgba(5, 10, 7, 0.6) 100%),
-                    linear-gradient(180deg, transparent 60%, rgba(5, 10, 7, 0.95) 100%);
-        pointer-events: none;
-    }
-
-    .slide-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        color: #ffffff;
-        padding: 30px 20px 20px 20px;
-        text-align: center;
-        font-family: 'Georgia', serif;
-        font-size: 16px;
-        letter-spacing: 0.5px;
-        z-index: 2;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-    }
-
-    .ctrl-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(5, 10, 7, 0.85);
-        color: #c5a059;
-        border: 1px solid rgba(197, 160, 89, 0.5);
-        width: 44px;
-        height: 44px;
-        cursor: pointer;
-        font-size: 18px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        z-index: 10;
-    }
-
-    .ctrl-btn:hover {
-        background: #c5a059;
-        color: #000000;
-        box-shadow: 0 0 15px rgba(197, 160, 89, 0.6);
-    }
-
-    .ctrl-btn.prev-slide { left: 15px; }
-    .ctrl-btn.next-slide { right: 15px; }
-
-    /* СЕТКА КАРТОЧЕК */
-    .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-
-    .park-card {
-        background: rgba(255, 255, 255, 0.025);
-        padding: 26px 22px;
-        border-radius: 10px;
-        min-height: 150px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .card-gold { border-left: 3px solid #c5a059; }
-    .card-green { border-left: 3px solid #3a533c; }
-
-    .card-num {
-        font-size: 11px;
-        color: #c5a059;
-        font-weight: 700;
-        letter-spacing: 2px;
-        margin-bottom: 8px;
-        display: block;
-    }
-
-    .park-card h3 {
-        margin: 0 0 8px 0;
-        color: #ffffff;
-        font-family: 'Georgia', serif;
-        font-size: 19px;
-    }
-
-    .park-card p {
-        opacity: 0.8;
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    /* БАННЕР КАРТЫ С ВОЗВРАЩЕННЫМ СМАЙЛИКОМ */
-    .map-banner {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid #c5a059;
-        border-radius: 12px;
-        padding: 35px 25px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .map-banner h2 {
-        font-family: 'Georgia', serif;
-        font-size: 26px;
-        color: #c5a059;
-        margin-top: 0;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .map-emoji {
-        font-size: 28px;
-    }
-
-    .map-banner p {
-        opacity: 0.85;
-        font-size: 15px;
-        max-width: 650px;
-        margin: 0 auto 22px;
-        line-height: 1.6;
-    }
-
-    .btn-map-banner {
-        display: inline-block;
-        background: #c5a059;
-        color: #050a07;
-        font-weight: 700;
-        padding: 12px 30px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 14px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-map-banner:hover {
-        background: #f1c40f;
-        box-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
-    }
-
-    /* НОВОСТИ */
-    .news-card {
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.025);
-        border-radius: 10px;
-        border-top: 3px solid #3a533c;
-        border-left: 1px solid rgba(255,255,255,0.04);
-        border-right: 1px solid rgba(255,255,255,0.04);
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-        overflow: hidden;
-    }
-
-    .news-img-wrapper {
-        width: 100%;
-        height: 200px;
-        background-color: #050a07;
-    }
-
-    .news-img-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .news-content {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        gap: 10px;
-    }
-
-    .news-date {
-        font-size: 12px;
-        color: #c5a059;
-    }
-
-    .news-card h3 {
-        margin: 0;
-        font-size: 19px;
-        color: #fff;
-        font-family: 'Georgia', serif;
-    }
-
-    .news-card p {
-        font-size: 14px;
-        opacity: 0.75;
-        line-height: 1.5;
-        margin: 0;
-        flex-grow: 1;
-    }
-
-    .news-divider {
-        border: 0;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        margin: 8px 0;
-    }
-
-    .news-link {
-        color: #c5a059;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 700;
-    }
-
-    .news-link:hover {
-        color: #f1c40f;
-    }
-
-    /* ГИБКИЕ МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛОК И ПЛАНШЕТОВ */
-    @media (max-width: 768px) {
-        .hero {
-            padding: 25px 15px 15px 15px;
-        }
-
-        .hero h1 { 
-            font-size: 34px; 
-            letter-spacing: 1.5px;
-            margin: 8px 0 6px 0;
-        }
-
-        .hero .subtitle {
-            font-size: 11px;
-            letter-spacing: 2.5px;
-        }
-
-        .hero p {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .section-title {
-            font-size: 22px;
-        }
-
-        .slide-node { 
-            height: 280px; 
-        }
-
-        .slide-info {
-            font-size: 13px;
-            padding: 20px 12px 12px 12px;
-        }
-
-        .ctrl-btn {
-            width: 36px;
-            height: 36px;
-            font-size: 14px;
-        }
-
-        .ctrl-btn.prev-slide { left: 8px; }
-        .ctrl-btn.next-slide { right: 8px; }
-
-        .cards-grid {
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .map-banner {
-            padding: 22px 16px;
-        }
-
-        .map-banner h2 {
-            font-size: 20px;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .map-emoji {
-            font-size: 24px;
-        }
-
-        .map-banner p {
-            font-size: 13px;
-        }
-
-        .btn-map-banner {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 12px 0;
-        }
-    }
-</style>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    let currentIdx = 0;
-    function changeSlide(dir) {
-        const container = document.getElementById('customSlider');
-        const slidesCount = document.querySelectorAll('.slide-node').length;
-        
-        if (slidesCount === 0) return;
-        currentIdx = (currentIdx + dir + slidesCount) % slidesCount;
-        container.style.transform = `translateX(-${currentIdx * 100}%)`;
-    }
-</script>
 {% endblock %}
